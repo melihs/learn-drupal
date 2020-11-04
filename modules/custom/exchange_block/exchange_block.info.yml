@@ -1,0 +1,5 @@
+name: Exchange Module
+description:  Döviz Kuru Modülü
+type: module
+core: 8.x
+
