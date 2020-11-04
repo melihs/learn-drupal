@@ -18,6 +18,14 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class ExchangeBlock extends BlockBase {
 
+  const CURRENCY = [
+      'USD' => 'DOLAR',
+      'EUR' => 'EURO',
+      'TRY' => 'TÜRK LİRASI'
+  ];
+
+  const URI = 'https://api.exchangeratesapi.io/latest?base=';
+
   /**
    * {@inheritdoc}
    */
@@ -26,10 +34,24 @@ class ExchangeBlock extends BlockBase {
 
     $theme = "exchange";
 
-    if (empty($config['currency'])) {
-      $currency = $this->t('para birimi seçilmedi!');
+    if (empty($config)) {
+      $currency_from = $this->t('para birimi seçilmedi!');
+      $currency_to = $this->t('para birimi seçilmedi!');
     }else {
-      $currency = $config['currency'];
+      $currency_from = $config['currency_from'];
+      $currency_to = $config['currency_to'];
+    }
+
+    $response = \Drupal::httpClient()->get(self::URI.$currency_from);
+
+    $rates = json_decode((string) $response->getBody(), TRUE)['rates'];
+//    $rates = $data['rates'];
+
+//    $result = 0;
+    foreach ($rates as $currency => $value) {
+      if ($currency === $currency_to) {
+        $result = round($value, 2);
+      }
     }
 
     return [
@@ -37,8 +59,9 @@ class ExchangeBlock extends BlockBase {
       '#cache' => [
         'max-age' => 0
       ],
-      '#currency' => $currency
-//      '#markup' => $this->t($currency)
+      '#currency_from' => $currency_from,
+      '#currency_to' => $currency_to,
+      '#result' => $result,
     ];
   }
 
@@ -55,17 +78,22 @@ class ExchangeBlock extends BlockBase {
 
     $config = $this->getConfiguration();
 
-    $form['currency'] = [
-      '#type'          => 'select',
-      '#title'         => $this->t('para birimi'),
-      '#options'       => [
-        'USD' => 'DOLAR',
-        'EUR' => 'EURO',
-        'TRY' => 'TÜRK LİRASI'
-      ],
-      '#required'      => TRUE,
-      'description'    => $this->t('para birimine göre güncel kurun karşılığı ekranda gösterilecek'),
-      '#default_value' => isset($config['currency']) ? $config['currency'] : '',
+
+    $form['currency_from'] = [
+      '#type' => 'select',
+      '#title' => $this->t('para birimi'),
+      '#options' => self::CURRENCY,
+      '#required' => TRUE,
+      '#description' => $this->t('seçili para birimi'),
+      '#default_value' => isset($config['currency_from']) ? $config['currency_from'] : '',
+    ];
+    $form['currency_to'] = [
+      '#type' => 'select',
+      '#title' => $this->t('para birimi'),
+      '#options' => self::CURRENCY,
+      '#required' => TRUE,
+      '#description' => $this->t('seçili döviz kuruna karşılık gelecek para birimi'),
+      '#default_value' => isset($config['currency_to']) ? $config['currency_to'] : '',
     ];
 
     return $form;
@@ -80,7 +108,8 @@ class ExchangeBlock extends BlockBase {
   public function blockSubmit($form, FormStateInterface $form_state) {
     parent::blockSubmit($form, $form_state);
 
-    $this->configuration['currency'] = $form_state->getValue('currency');
+    $this->configuration['currency_from'] = $form_state->getValue('currency_from');
+    $this->configuration['currency_to'] = $form_state->getValue('currency_to');
 
   }
 

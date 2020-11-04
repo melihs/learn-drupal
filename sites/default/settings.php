@@ -778,11 +778,11 @@ $settings['entity_update_backup'] = TRUE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'drupaldb',
-  'username' => 'root',
-  'password' => '',
+  'database' => 'drupal8',
+  'username' => 'drupal8',
+  'password' => 'drupal8',
   'prefix' => '',
-  'host' => 'localhost',
+  'host' => 'database',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',

@@ -11,7 +11,11 @@ function exchange_block_theme($existing, $type, $theme, $path)
     'exchange' => [
       'render element' => 'form',
       'template' => 'exchange',
-      'variables' => ['currency'=> NULL]
+      'variables' => [
+        'currency_from'=> NULL,
+        'currency_to'=> NULL,
+        'result'=> NULL,
+      ]
     ]
   ];
 }

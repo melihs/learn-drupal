@@ -1,0 +1,5 @@
+name: local
+recipe: drupal8
+config:
+  webroot: .
+  xdebug: true
