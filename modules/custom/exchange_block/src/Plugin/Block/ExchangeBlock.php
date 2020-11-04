@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @Block(
  *   id = "exchange_block",
- *   admin_label = @Translation("Döviz kuru bloku"),
+ *   admin_label = @Translation("Döviz kuru"),
  *   category = @Translation("exchange custom block")
  * )
  */
@@ -23,8 +23,22 @@ class ExchangeBlock extends BlockBase {
    */
   public function build() {
     $config = $this->getConfiguration();
+
+    $theme = "exchange";
+
+    if (empty($config['currency'])) {
+      $currency = $this->t('para birimi seçilmedi!');
+    }else {
+      $currency = $config['currency'];
+    }
+
     return [
-      '#markup' => $this->t($config['currency'])
+      '#theme'  => $theme,
+      '#cache' => [
+        'max-age' => 0
+      ],
+      '#currency' => $currency
+//      '#markup' => $this->t($currency)
     ];
   }
 
