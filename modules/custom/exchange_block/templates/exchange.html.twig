@@ -1,5 +1,8 @@
-<div>
-    <h1> 1 {{ currency_to }}</h1>
-    <h1>{{ currency_from }}</h1>
-    <h1>sonuç: {{ result }} {{ currency_to }}</h1>
+<link rel="stylesheet" href="modules/custom/exchange_block/css/exchange-block.css">
+
+<div class="card">
+    <div class="container">
+        <h1><b>1 {{ currency_to }} = {{ result }} {{ currency_from }}</b></h1>
+        <p> <b>Güncelleme Tarihi:</b> {{ update_date }}</p>
+    </div>
 </div>

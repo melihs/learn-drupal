@@ -156,3 +156,6 @@ modules.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/phpstorm+all,drupal8
 sites/
+.DS_Store
+modules/.DS_Store
+modules/custom/.DS_Store
