@@ -1,6 +1,6 @@
 name: Exchange Service
 type: module
-description: döviz servisi
+description: exchange rate service
 core: 8.x
 configure: exchange_service.add
 dependencies:
