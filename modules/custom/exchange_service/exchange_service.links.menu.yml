@@ -1,0 +1,4 @@
+exchange_service.list:
+  title: 'Exchange Form List Currency'
+  parent: system.admin_config_system
+  route_name: exchange_service.list

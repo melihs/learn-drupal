@@ -1,0 +1,23 @@
+exchange_service.add:
+  path: '/admin/config/system/add-currency'
+  defaults:
+    _form: '\Drupal\exchange_service\Form\AddCurrency'
+    _title: 'Add new currency'
+  requirements:
+    _permission: 'access content'
+
+exchange_service.list:
+  path: '/admin/config/system/list-currency'
+  defaults:
+    _form: '\Drupal\exchange_service\Form\ListCurrency'
+    _title: 'show currency list'
+  requirements:
+    _permission: 'access content'
+
+exchange_service.edit:
+  path: '/admin/config/system/edit-currency/{id}'
+  defaults:
+    _form: '\Drupal\exchange_service\Form\EditCurrency'
+    _title: 'currency edit'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,7 @@
+name: Exchange Service
+type: module
+description: döviz servisi
+core: 8.x
+configure: exchange_service.add
+dependencies:
+  - menu_item_extras

@@ -1,0 +1,44 @@
+# <?php
+
+# function exchange_service_schema() {
+#   $schema['add_currency'] = [
+#     'description' => 'add currency',
+#     'fields' => [
+#       'id' => [
+#         'description' => 'ID.',
+#         'type' => 'serial',
+#         'unsigned' => TRUE,
+#         'not null' => TRUE,
+#       ],
+#       'currency' => [
+#         'description' => 'currency',
+#         'type' => 'varchar',
+#         'length' => DRUPAL_EXTENSION_NAME_MAX_LENGTH,
+#         'not null' => TRUE,
+#         'default' => '',
+#       ],
+#       'type' => [
+#         'description' => 'currency shortcode',
+#         'type' => 'varchar',
+#         'length' => 64,
+#         'not null' => TRUE,
+#         'default' => '',
+#       ],
+#       'rate' => [
+#         'description' => 'rate',
+#         'type' => 'varchar',
+#         'length' => 64,
+#         'not null' => TRUE,
+#         'default' => 0,
+#       ],
+#        'created_at' => [
+#          'description' => 'exchange created_at',
+#          'type' => 'varchar',
+#          'mysql_type' => 'datetime',
+#          'not null' => FALSE,
+#        ],
+#     ],
+#     'primary key' => ['id'],
+#   ];
+#   return $schema;
+# }
